@@ -1,6 +1,3 @@
-# Guia_Git_GitHub
-Guia passo a passo Git &amp; Github
-
 # 📚 Manual Completo: Git e GitHub para Iniciantes
 
 > Guia definitivo e visual para quem está começando com controle de versão
