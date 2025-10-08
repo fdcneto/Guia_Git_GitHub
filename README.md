@@ -184,7 +184,7 @@ Desde que:
 
 ## 👨‍🏫 Autor
 
-Desenvolvido para ajudar estudantes de programação a dominarem Git e GitHub.
+Desenvolvido por: @fdcneto para ajudar estudantes de programação a dominarem Git e GitHub.
 
 Baseado no material do curso de Desenvolvimento de Sistemas - Prof. MSc. Renan Procópio
 
