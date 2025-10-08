@@ -184,7 +184,7 @@ Desde que:
 
 ## 👨‍🏫 Autor
 
-Desenvolvido com ❤️ para ajudar estudantes de programação a dominarem Git e GitHub.
+Desenvolvido para ajudar estudantes de programação a dominarem Git e GitHub.
 
 Baseado no material do curso de Desenvolvimento de Sistemas - Prof. MSc. Renan Procópio
 
@@ -237,7 +237,7 @@ R: Sim! Atualizado para 2025 com as práticas mais recentes.
 
 ---
 
-Feito com ❤️ para a comunidade dev brasileira 🇧🇷
+Feito para a comunidade dev brasileira 🇧🇷
 
 **⭐ Não esqueça de dar uma estrela se este manual foi útil! ⭐**
 
