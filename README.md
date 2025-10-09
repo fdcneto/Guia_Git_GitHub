@@ -1,6 +1,6 @@
-# 📚 Manual Completo: Git e GitHub para Iniciantes
+# 📚 Manual Git e GitHub para Iniciantes
 
-> Guia definitivo e visual para quem está começando com controle de versão
+> Guia para quem está começando com controle de versão
 
 [![GitHub](https://img.shields.io/badge/GitHub-Manual-blue?style=for-the-badge&logo=github)](https://github.com)
 [![Git](https://img.shields.io/badge/Git-Tutorial-orange?style=for-the-badge&logo=git)](https://git-scm.com)
