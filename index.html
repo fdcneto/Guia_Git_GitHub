@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Git e GitHub para Iniciantes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #fff9c4 100%);
+            color: #333;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #2196F3;
+            margin: 35px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4CAF50;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #4CAF50;
+            margin: 25px 0 15px 0;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #E3F2FD 0%, #C8E6C9 100%);
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: #FFF9C4;
+            border-left: 5px solid #FFC107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: #FFEBEE;
+            border-left: 5px solid #F44336;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: #E8F5E9;
+            border-left: 5px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border: 2px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .command {
+            background: #263238;
+            color: #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .command-title {
+            color: #FFC107;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d32f2f;
+            border: 1px solid #e0e0e0;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        strong {
+            color: #1976D2;
+        }
+
+        .highlight {
+            background: #FFEB3B;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%);
+            border: 3px dashed #2196F3;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            color: #1976D2;
+            font-weight: bold;
+        }
+
+        .tip-icon::before {
+            content: "💡 ";
+            font-size: 18px;
+        }
+
+        .warning-icon::before {
+            content: "⚠️ ";
+            font-size: 18px;
+        }
+
+        .success-icon::before {
+            content: "✅ ";
+            font-size: 18px;
+        }
+
+        .git-icon::before {
+            content: "🔧 ";
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #2196F3;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .toc {
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border: 2px solid #4CAF50;
+        }
+
+        .toc h3 {
+            color: #2E7D32;
+            margin-top: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            padding: 8px 0;
+        }
+
+        .toc a {
+            color: #1976D2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        
+        footer {
+            background: #263238;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        /* ========== CORREÇÃO MOBILE ========== */
+        /* Corrigir overflow no mobile */
+        @media screen and (max-width: 768px) {
+            .container {
+                overflow-x: hidden;
+            }
+            
+            .content {
+                padding: 20px;
+                overflow-x: hidden;
+            }
+            
+            .command {
+                overflow-x: auto;
+                word-wrap: break-word;
+                word-break: break-all;
+                white-space: pre-wrap;
+            }
+            
+            code {
+                word-wrap: break-word;
+                word-break: break-all;
+                white-space: pre-wrap;
+            }
+            
+            .step-box, .info-box, .warning-box, .success-box {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                overflow-x: hidden;
+            }
+            
+            .image-placeholder {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .step-box, .info-box, .warning-box, .success-box {
+                padding: 15px;
+            }
+            
+            body {
+                font-size: 13px;
+            }
+            
+            h2 {
+                font-size: 16px;
+            }
+            
+            h3 {
+                font-size: 15px;
+            }
+        }
+
+        .command, code {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Manual Git e GitHub para Iniciantes</h1>
+            <p>Guia para iniciantes em controle de versão</p>
+        </header>
+
+        <div class="content">
+            <div class="intro-box">
+                <h3 class="tip-icon">Bem-vindo ao Mundo do Git e GitHub!</h3>
+                <p>Este manual foi criado especialmente para você que está começando sua jornada na programação e nunca teve contato com Git ou GitHub. Aqui você vai aprender desde o básico até os comandos mais importantes, tudo de forma clara e prática. Vamos juntos nessa!</p>
+            </div>
+
+            <div class="toc">
+                <h3>📋 Índice do Conteúdo</h3>
+                <ul>
+                    <li><a href="#introducao">1. O que é Git e GitHub?</a></li>
+                    <li><a href="#criar-conta">2. Criando sua conta no GitHub</a></li>
+                    <li><a href="#instalar-git">3. Instalando o Git</a></li>
+                    <li><a href="#git-bash">4. Instalando o Git Bash</a></li>
+                    <li><a href="#git-desktop">5. Instalando o GitHub Desktop</a></li>
+                    <li><a href="#configuracao">6. Configuração Inicial do Git</a></li>
+                    <li><a href="#primeiro-repositorio">7. Criando seu Primeiro Repositório</a></li>
+                    <li><a href="#clonar">8. Clonando um Repositório</a></li>
+                    <li><a href="#comandos-basicos">9. Comandos Básicos do Git</a></li>
+                    <li><a href="#vscode">10. Integrando com VS Code</a></li>
+                    <li><a href="#workflow">11. Fluxo de Trabalho Completo</a></li>
+                    <li><a href="#comandos-avancados">12. Outros Comandos Importantes</a></li>
+                </ul>
+            </div>
+
+            <h2 id="introducao">1. O que é Git e GitHub?</h2>
+            
+            <div class="step-box">
+                <h3 class="git-icon">Entendendo o Git</h3>
+                <p><strong>Git</strong> é um sistema de controle de versão distribuído (DVCS - Distributed Version Control System). Ele foi criado por Linus Torvalds, o mesmo criador do Linux, e é um software de código aberto.</p>
+                
+                <p><strong>Mas o que isso significa na prática?</strong></p>
+                <p>Imagine que você está escrevendo um trabalho importante no Word. Você salva o arquivo como "trabalho_v1.doc", depois faz mudanças e salva como "trabalho_v2.doc", depois "trabalho_final.doc", "trabalho_final_revisado.doc", "trabalho_final_final.doc"... Você já passou por isso, não é?</p>
+                
+                <p>O Git resolve exatamente esse problema! Ele mantém um histórico completo de todas as mudanças que você fez no seu código, permitindo que você:</p>
+                <ul>
+                    <li>Volte para versões anteriores quando algo der errado</li>
+                    <li>Veja exatamente o que foi modificado e quando</li>
+                    <li>Trabalhe em equipe sem sobrescrever o trabalho dos outros</li>
+                    <li>Crie versões paralelas do seu projeto (branches) para testar novas funcionalidades</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3 class="git-icon">Entendendo o GitHub</h3>
+                <p><strong>GitHub</strong> é uma plataforma web que hospeda repositórios Git na nuvem. É importante entender:</p>
+                
+                <div class="info-box">
+                    <p><strong class="tip-icon">Git ≠ GitHub</strong></p>
+                    <ul>
+                        <li><strong>Git</strong> é o sistema/ferramenta instalada no seu computador</li>
+                        <li><strong>GitHub</strong> é o site/serviço online que usa Git</li>
+                        <li>Você pode usar Git sem GitHub (criando repositórios locais)</li>
+                        <li>Mas o GitHub precisa do Git para funcionar</li>
+                    </ul>
+                </div>
+
+                <p><strong>Outras plataformas similares ao GitHub:</strong> GitLab, BitBucket, SourceForge. Neste manual, focaremos no GitHub por ser a plataforma mais popular e amplamente utilizada.</p>
+            </div>
+
+            <h2 id="criar-conta">2. Criando sua Conta no GitHub</h2>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Acesse o site oficial:</strong></p>
+                <p>Abra seu navegador e digite: <code>https://github.com</code></p>
+                <p>Ou: <code>https://github.com/?locale=pt-br</code></p>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/tela_inicial_github.png" alt="tela_inicial_github>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Clique em "Sign up" (Cadastrar-se)</strong></p>
+                <p>O botão está localizado no canto superior direito da página.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Preencha os dados solicitados:</strong></p>
+                <ul>
+                    <li><strong>Email:</strong> Use um email válido que você acessa regularmente</li>
+                    <li><strong>Password (Senha):</strong> Crie uma senha forte (mínimo 8 caracteres, com letras e números)</li>
+                    <li><strong>Username (Nome de usuário):</strong> Escolha um nome único. Este será seu identificador no GitHub!</li>
+                </ul>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Dica para escolher seu username:</strong></p>
+                    <ul>
+                        <li>Use letras minúsculas e hífens (não use espaços ou caracteres especiais)</li>
+                        <li>Escolha algo profissional, pois você pode usar no futuro para mostrar seus projetos</li>
+                        <li>Exemplo: joao-silva, maria-santos, dev-lucas</li>
+                    </ul>
+                </div>
+
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/form_cadastro_github.png" alt="form_cadastro_github github.com">
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">4</span><strong>Verifique seu email</strong></p>
+                <p>O GitHub enviará um código de verificação para o email que você cadastrou. Copie esse código e cole na página do GitHub para confirmar sua conta.</p>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/Gemini_Generated_Image_cx4ef7cx4ef7cx4e.png" alt="Generated_Image">
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">5</span><strong>Personalize sua experiência (opcional)</strong></p>
+                <p>O GitHub pode fazer algumas perguntas sobre como você pretende usar a plataforma. Você pode responder ou pular essa etapa clicando em "Skip".</p>
+            </div>
+
+            <div class="success-box">
+                <p class="success-icon"><strong>Parabéns! Sua conta está criada!</strong></p>
+                <p>Agora você tem acesso ao GitHub e pode começar a explorar a plataforma. Mas antes de criar seu primeiro repositório, vamos instalar as ferramentas necessárias no seu computador.</p>
+            </div>
+
+            <h2 id="instalar-git">3. Instalando o Git no seu Computador</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O que vamos instalar?</strong></p>
+                <p>O Git é o software principal que permite o controle de versão. Ele funciona através de linha de comando (terminal) e é essencial para todos os próximos passos.</p>
+            </div>
+
+            <h3>Para Windows:</h3>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Acesse o site oficial do Git:</strong></p>
+                <p>Digite no navegador: <code>https://git-scm.com</code></p>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/download_git.png" alt="download_git">
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Clique no botão de download</strong></p>
+                <p>O site detectará automaticamente seu sistema operacional e mostrará o botão adequado. Clique em "Download for Windows" (ou o sistema que você estiver usando).</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Execute o instalador</strong></p>
+                <p>Após o download, clique duas vezes no arquivo baixado (geralmente chamado "Git-x.xx.x-64-bit.exe").</p>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Atenção durante a instalação:</strong></p>
+                    <p>O instalador fará várias perguntas. Para iniciantes, recomendamos aceitar as opções padrão clicando em "Next" em todas as telas. As configurações padrão funcionam perfeitamente para começar!</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">4</span><strong>Configurações importantes (durante a instalação):</strong></p>
+                <ul>
+                    <li><strong>Editor padrão:</strong> Mantenha "Vim" ou escolha "Nano" ou "Notepad++" se preferir</li>
+                    <li><strong>PATH environment:</strong> Selecione "Git from the command line and also from 3rd-party software" (opção recomendada)</li>
+                    <li><strong>Line ending conversions:</strong> Mantenha "Checkout Windows-style, commit Unix-style line endings"</li>
+                    <li>Para todas as outras opções, mantenha os valores padrão</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    ⚙️ Imagem: Tela de instalação do Git<br>
+                    Mostrando as opções de configuração
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">5</span><strong>Finalize a instalação</strong></p>
+                <p>Clique em "Install" e aguarde a conclusão. Depois clique em "Finish".</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">6</span><strong>Verifique se a instalação funcionou:</strong></p>
+                <p>Abra o Prompt de Comando (CMD) ou PowerShell e digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Verificar versão do Git:</span>
+                    git --version
+                </div>
+                
+                <p>Se aparecer algo como "git version 2.xx.x", a instalação foi bem-sucedida!</p>
+                
+                <div class="image-placeholder">
+                    💻 Imagem: Terminal mostrando resultado do comando git --version<br>
+                    Exemplo: "git version 2.43.0"
+                </div>
+            </div>
+
+            <h3>Para Mac:</h3>
+
+            <div class="step-box">
+                <p>No Mac, você tem duas opções:</p>
+                
+                <p><strong>Opção 1 - Homebrew (recomendado):</strong></p>
+                <div class="command">
+                    <span class="command-title">Instalar Git via Homebrew:</span>
+                    brew install git
+                </div>
+                
+                <p><strong>Opção 2 - Download direto:</strong></p>
+                <p>Acesse <code>https://git-scm.com</code> e baixe o instalador para Mac.</p>
+            </div>
+
+            <h3>Para Linux:</h3>
+
+            <div class="step-box">
+                <p>No Linux, use o gerenciador de pacotes da sua distribuição:</p>
+                
+                <p><strong>Ubuntu/Debian:</strong></p>
+                <div class="command">
+                    <span class="command-title">Instalar Git no Ubuntu/Debian:</span>
+                    sudo apt-get update<br>
+                    sudo apt-get install git
+                </div>
+                
+                <p><strong>Fedora:</strong></p>
+                <div class="command">
+                    <span class="command-title">Instalar Git no Fedora:</span>
+                    sudo dnf install git
+                </div>
+            </div>
+
+            <h2 id="git-bash">4. Instalando e Usando o Git Bash</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O que é o Git Bash?</strong></p>
+                <p>Git Bash é um terminal especial para Windows que emula um ambiente Linux. Ele já vem incluído na instalação do Git para Windows! Se você seguiu o passo anterior e instalou o Git, o Git Bash já está instalado no seu computador.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Abrindo o Git Bash:</strong></p>
+                <ul>
+                    <li>Clique no menu Iniciar do Windows</li>
+                    <li>Digite "Git Bash" na barra de pesquisa</li>
+                    <li>Clique no aplicativo "Git Bash"</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    🔍 Imagem: Menu Iniciar do Windows<br>
+                    Mostrando "Git Bash" na busca
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Conhecendo o Git Bash:</strong></p>
+                <p>Uma janela preta (ou com fundo colorido) abrirá. Ela se parece com isso:</p>
+                
+                <div class="command">
+                    usuario@COMPUTADOR MINGW64 ~<br>
+                    $
+                </div>
+                
+                <p>O símbolo <code>$</code> indica que o terminal está pronto para receber comandos.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Comandos básicos do terminal:</strong></p>
+                <p>Antes de usar o Git, é importante conhecer alguns comandos básicos de navegação no terminal:</p>
+                
+                <table>
+                    <tr>
+                        <th>Comando</th>
+                        <th>O que faz</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td><code>pwd</code></td>
+                        <td>Mostra em qual pasta você está</td>
+                        <td><code>pwd</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>ls</code></td>
+                        <td>Lista arquivos e pastas</td>
+                        <td><code>ls</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cd</code></td>
+                        <td>Muda de pasta</td>
+                        <td><code>cd Documentos</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cd ..</code></td>
+                        <td>Volta uma pasta</td>
+                        <td><code>cd ..</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>mkdir</code></td>
+                        <td>Cria uma nova pasta</td>
+                        <td><code>mkdir meus-projetos</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>clear</code></td>
+                        <td>Limpa a tela do terminal</td>
+                        <td><code>clear</code></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="success-box">
+                <p class="success-icon"><strong>Dica Prática:</strong></p>
+                <p>Você também pode abrir o Git Bash em qualquer pasta do Windows! Basta clicar com o botão direito dentro da pasta e selecionar "Git Bash Here". Isso é muito útil para trabalhar em projetos específicos.</p>
+                
+                <div class="image-placeholder">
+                    🖱️ Imagem: Menu de contexto do Windows Explorer<br>
+                    Mostrando a opção "Git Bash Here"
+                </div>
+            </div>
+
+            <h2 id="git-desktop">5. Instalando o GitHub Desktop</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O que é o GitHub Desktop?</strong></p>
+                <p>GitHub Desktop é uma interface gráfica (com botões e janelas) para usar o Git. Enquanto o Git Bash usa comandos de texto, o GitHub Desktop permite fazer as mesmas operações clicando em botões. É ótimo para visualizar mudanças e para quem está começando!</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Acesse o site oficial:</strong></p>
+                <p>Digite no navegador: <code>https://desktop.github.com</code></p>
+                
+                <div class="image-placeholder">
+                    🌐 Imagem: Página inicial do GitHub Desktop<br>
+                    Mostrando o botão "Download for Windows"
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Baixe e instale:</strong></p>
+                <p>Clique em "Download for Windows" (ou Mac, se for o caso). O instalador será baixado automaticamente.</p>
+                <p>Execute o arquivo baixado (GitHubDesktopSetup.exe) e aguarde a instalação automática.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Faça login na sua conta GitHub:</strong></p>
+                <p>Quando o GitHub Desktop abrir pela primeira vez, ele pedirá para você fazer login:</p>
+                <ul>
+                    <li>Clique em "Sign in to GitHub.com"</li>
+                    <li>Uma janela do navegador abrirá</li>
+                    <li>Faça login com o email e senha que você criou anteriormente</li>
+                    <li>Autorize o GitHub Desktop a acessar sua conta</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    🔐 Imagem: Tela de login do GitHub Desktop<br>
+                    Mostrando botão "Sign in to GitHub.com"
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">4</span><strong>Configure seu nome e email:</strong></p>
+                <p>O GitHub Desktop pedirá para confirmar seu nome e email. Esses dados aparecerão nos seus commits (histórico de mudanças). Verifique se estão corretos e clique em "Finish".</p>
+            </div>
+
+            <div class="success-box">
+                <p class="success-icon"><strong>Pronto!</strong></p>
+                <p>Agora você tem tanto o Git Bash (linha de comando) quanto o GitHub Desktop (interface gráfica) instalados. Você pode usar qualquer um dos dois - ou ambos! Muitos programadores usam os dois dependendo da situação.</p>
+            </div>
+
+            <h2 id="configuracao">6. Configuração Inicial do Git</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>Por que configurar?</strong></p>
+                <p>Antes de começar a usar o Git, precisamos dizer a ele quem você é. Essas informações aparecerão em todos os commits (registros de mudanças) que você fizer, então é importante configurar corretamente.</p>
+            </div>
+
+            <div class="step-box">
+                <h3>6.1) Configurar seu nome</h3>
+                <p>Abra o Git Bash e digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Configurar nome de usuário:</span>
+                    git config --global user.name "Seu Nome Completo"
+                </div>
+                
+                <p><strong>Exemplo:</strong></p>
+                <div class="command">
+                    git config --global user.name "João Silva"
+                </div>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Importante:</strong> Substitua "João Silva" pelo seu nome real! Mantenha as aspas.</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>6.2) Configurar seu email</h3>
+                <p>Digite o seguinte comando (usando o MESMO email da sua conta GitHub):</p>
+                
+                <div class="command">
+                    <span class="command-title">Configurar email:</span>
+                    git config --global user.email "seuemail@exemplo.com"
+                </div>
+                
+                <p><strong>Exemplo:</strong></p>
+                <div class="command">
+                    git config --global user.email "joao.silva@gmail.com"
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>6.3) Verificar suas configurações</h3>
+                <p>Para ter certeza de que tudo foi configurado corretamente, digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Ver todas as configurações:</span>
+                    git config --list
+                </div>
+                
+                <p>Você verá uma lista com todas as suas configurações. Procure pelas linhas:</p>
+                <div class="command">
+                    user.name=Seu Nome<br>
+                    user.email=seuemail@exemplo.com
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>6.4) Configurações opcionais (mas recomendadas)</h3>
+                
+                <p><strong>Configurar o editor padrão:</strong></p>
+                <p>Se você usa o VS Code (que veremos mais adiante), pode configurá-lo como editor padrão:</p>
+                
+                <div class="command">
+                    <span class="command-title">Definir VS Code como editor:</span>
+                    git config --global core.editor "code --wait"
+                </div>
+                
+                <p><strong>Configurar cores no terminal:</strong></p>
+                <p>Para facilitar a visualização, ative as cores nos comandos Git:</p>
+                
+                <div class="command">
+                    <span class="command-title">Ativar cores:</span>
+                    git config --global color.ui true
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>6.5) (RECOMENDADO) Gerar uma Chave SSH e Adicioná-la ao GitHub</h3>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>O que é SSH e por que usar?</strong></p>
+                    <p><strong>SSH (Secure Shell)</strong> é um protocolo de comunicação segura que permite conectar seu computador ao GitHub sem precisar digitar usuário e senha toda vez. É como criar uma "identidade digital" única para seu computador.</p>
+                    
+                    <p><strong>Vantagens de usar SSH:</strong></p>
+                    <ul>
+                        <li><strong>Segurança:</strong> Usa criptografia avançada para proteger suas informações</li>
+                        <li><strong>Praticidade:</strong> Depois de configurar, você não precisa mais digitar senha em cada operação</li>
+                        <li><strong>Autenticação automática:</strong> O GitHub reconhece seu computador automaticamente</li>
+                        <li><strong>Padrão da indústria:</strong> É o método mais usado por desenvolvedores profissionais</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Alternativa ao SSH:</strong></p>
+                    <p>Você também pode usar HTTPS (com usuário e senha ou token), mas o SSH é mais prático e seguro para uso diário. Se você pular essa etapa agora, poderá voltar e configurar depois.</p>
+                </div>
+
+                <h4><strong>Passo a passo detalhado para configurar SSH:</strong></h4>
+
+                <p><strong>6.5.1) Verificar se você já tem chaves SSH</strong></p>
+                <p>Antes de criar uma nova chave, vamos verificar se você já tem alguma. No Git Bash, digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Verificar chaves existentes:</span>
+                    ls -al ~/.ssh
+                </div>
+                
+                <p>Se você ver arquivos como <code>id_rsa.pub</code>, <code>id_ecdsa.pub</code> ou <code>id_ed25519.pub</code>, você já tem uma chave SSH e pode pular para o passo 6.5.4. Se aparecer "No such file or directory", continue para o próximo passo.</p>
+
+                <p><strong>6.5.2) Gerar uma nova chave SSH</strong></p>
+                <p>Vamos criar uma chave SSH usando o algoritmo Ed25519 (mais moderno e seguro). No Git Bash, digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Gerar chave SSH:</span>
+                    ssh-keygen -t ed25519 -C "seuemail@exemplo.com"
+                </div>
+                
+                <p><strong>Substitua "seuemail@exemplo.com" pelo email da sua conta GitHub!</strong></p>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>O que significa cada parte:</strong></p>
+                    <ul>
+                        <li><code>ssh-keygen</code>: comando para gerar chaves SSH</li>
+                        <li><code>-t ed25519</code>: tipo de criptografia (Ed25519 é o mais recomendado atualmente)</li>
+                        <li><code>-C "seu email"</code>: adiciona seu email como etiqueta/comentário na chave</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Nota:</strong> Se você estiver usando um sistema muito antigo que não suporta Ed25519, use este comando alternativo:</p>
+                    <div class="command">
+                        ssh-keygen -t rsa -b 4096 -C "seuemail@exemplo.com"
+                    </div>
+                </div>
+
+                <p><strong>6.5.3) Responder às perguntas durante a geração</strong></p>
+                <p>O terminal fará algumas perguntas. Veja como responder:</p>
+                
+                <div class="command">
+                    Enter file in which to save the key (/c/Users/você/.ssh/id_ed25519):
+                </div>
+                <p><strong>➡️ Apenas pressione ENTER</strong> (aceita o local padrão)</p>
+                
+                <div class="command">
+                    Enter passphrase (empty for no passphrase):
+                </div>
+                <p><strong>➡️ Digite uma senha forte</strong> (opcional, mas recomendado para maior segurança) ou pressione ENTER para não usar senha.</p>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Sobre a passphrase (senha):</strong></p>
+                    <ul>
+                        <li><strong>Com passphrase:</strong> Mais seguro. Se alguém copiar sua chave, não conseguirá usá-la sem a senha</li>
+                        <li><strong>Sem passphrase:</strong> Mais prático. Você não precisará digitar senha, mas se alguém acessar sua chave, poderá usá-la</li>
+                        <li><strong>Recomendação:</strong> Use uma passphrase se você trabalha em computador compartilhado ou público</li>
+                    </ul>
+                </div>
+                
+                <div class="command">
+                    Enter same passphrase again:
+                </div>
+                <p><strong>➡️ Digite a mesma senha novamente</strong> (ou pressione ENTER se não usou senha)</p>
+
+                <div class="success-box">
+                    <p class="success-icon"><strong>Chave criada com sucesso!</strong></p>
+                    <p>Você verá uma mensagem parecida com esta:</p>
+                    <div class="command">
+                        Your identification has been saved in /c/Users/você/.ssh/id_ed25519<br>
+                        Your public key has been saved in /c/Users/você/.ssh/id_ed25519.pub<br>
+                        The key fingerprint is:<br>
+                        SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx seuemail@exemplo.com
+                    </div>
+                    <p>Isso significa que duas chaves foram criadas:</p>
+                    <ul>
+                        <li><strong>Chave privada</strong> (<code>id_ed25519</code>): NUNCA compartilhe! Fica só no seu computador</li>
+                        <li><strong>Chave pública</strong> (<code>id_ed25519.pub</code>): Esta você vai adicionar no GitHub</li>
+                    </ul>
+                </div>
+
+                <p><strong>6.5.4) Iniciar o SSH Agent</strong></p>
+                <p>O SSH Agent é um programa que gerencia suas chaves SSH. Vamos iniciá-lo:</p>
+                
+                <div class="command">
+                    <span class="command-title">Iniciar SSH Agent:</span>
+                    eval "$(ssh-agent -s)"
+                </div>
+                
+                <p>Você verá algo como: <code>Agent pid 12345</code></p>
+
+                <p><strong>6.5.5) Adicionar sua chave SSH ao SSH Agent</strong></p>
+                <p>Agora vamos registrar sua chave privada no SSH Agent:</p>
+                
+                <div class="command">
+                    <span class="command-title">Adicionar chave ao Agent:</span>
+                    ssh-add ~/.ssh/id_ed25519
+                </div>
+                
+                <p>Se você usou uma passphrase, ela será solicitada agora. Digite-a e pressione ENTER.</p>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Se você usou RSA em vez de Ed25519:</strong></p>
+                    <div class="command">
+                        ssh-add ~/.ssh/id_rsa
+                    </div>
+                </div>
+
+                <p><strong>6.5.6) Copiar sua chave pública</strong></p>
+                <p>Agora precisamos copiar o conteúdo da chave pública para adicionar no GitHub. Digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Copiar chave pública para a área de transferência (Windows):</span>
+                    clip < ~/.ssh/id_ed25519.pub
+                </div>
+                
+                <p><strong>Para Mac:</strong></p>
+                <div class="command">
+                    pbcopy < ~/.ssh/id_ed25519.pub
+                </div>
+                
+                <p><strong>Para Linux:</strong></p>
+                <div class="command">
+                    cat ~/.ssh/id_ed25519.pub
+                </div>
+                <p>(Depois selecione e copie o texto que aparecer)</p>
+
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Alternativa:</strong> Se o comando acima não funcionar, você pode abrir o arquivo manualmente:</p>
+                    <div class="command">
+                        notepad ~/.ssh/id_ed25519.pub
+                    </div>
+                    <p>O arquivo abrirá no Bloco de Notas. Copie TODO o conteúdo (Ctrl+A, depois Ctrl+C)</p>
+                </div>
+
+                <p><strong>6.5.7) Adicionar a chave SSH no GitHub</strong></p>
+                <p>Agora vamos ao site do GitHub para adicionar sua chave:</p>
+                
+                <ol>
+                    <li>Acesse <code>https://github.com</code> e faça login</li>
+                    <li>Clique na sua foto de perfil (canto superior direito)</li>
+                    <li>Clique em <strong>Settings</strong> (Configurações)</li>
+                    <li>No menu lateral esquerdo, clique em <strong>SSH and GPG keys</strong></li>
+                    <li>Clique no botão verde <strong>New SSH key</strong> (ou <strong>Add SSH key</strong>)</li>
+                </ol>
+                
+                <div class="image-placeholder">
+                    
+                    <img class="imagens" width="800px"  src="./image/ssh_gpg.png" alt="SSH and GPG keys GitHub">
+                </div>
+                
+                <p>Preencha os campos:</p>
+                <ul>
+                    <li><strong>Title (Título):</strong> Dê um nome que identifique seu computador, exemplo: "Notebook Pessoal", "PC Casa", "Desktop Trabalho"</li>
+                    <li><strong>Key type:</strong> Deixe em "Authentication Key"</li>
+                    <li><strong>Key (Chave):</strong> Cole a chave que você copiou (Ctrl+V). Ela começará com "ssh-ed25519" ou "ssh-rsa"</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/add_ssh_key.png" alt="SSH and GPG keys GitHub">
+                </div>
+                
+                <p>Clique em <strong>Add SSH key</strong></p>
+                
+                <p>O GitHub pode pedir sua senha para confirmar. Digite sua senha do GitHub e confirme.</p>
+
+                <div class="success-box">
+                    <p class="success-icon"><strong>Chave SSH adicionada com sucesso!</strong></p>
+                    <p>Você verá sua chave listada na página com o título que você escolheu e a data de adição.</p>
+                </div>
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/ssh_key_adicionada_com_sucesso.png" alt="SSH and GPG keys GitHub">
+                </div>
+
+                <p><strong>6.5.8) Testar a conexão SSH</strong></p>
+                <p>Vamos verificar se tudo está funcionando corretamente. No Git Bash, digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Testar conexão com GitHub:</span>
+                    ssh -T git@github.com
+                </div>
+                
+                <p>Na primeira vez, você verá uma mensagem perguntando se confia no host:</p>
+                <div class="command">
+                    The authenticity of host 'github.com (IP)' can't be established.<br>
+                    Are you sure you want to continue connecting (yes/no/[fingerprint])?
+                </div>
+                
+                <p><strong>➡️ Digite "yes" e pressione ENTER</strong></p>
+                
+                <p>Se tudo deu certo, você verá uma mensagem como:</p>
+                <div class="command">
+                    Hi seu-usuario! You've successfully authenticated, but GitHub does not provide shell access.
+                </div>
+                
+                <div class="success-box">
+                    <p class="success-icon"><strong>Perfeito! Sua conexão SSH está funcionando! Chave SSH adicionada com sucesso!</strong></p>
+                    <div class="success-box">
+    <p>Agora você pode usar o GitHub sem precisar digitar senha toda vez. Quando for clonar repositórios, use sempre a URL SSH (que começa com git@github.com) em vez da URL HTTPS.</p>
+</div>
+
+<div class="step-box">
+    <h4><strong>Entendendo a diferença na prática:</strong></h4>
+    <p>Quando você vai clonar um repositório, o GitHub oferece duas opções de URL. Veja a diferença:</p>
+    
+    <p><strong>URL HTTPS (antiga forma):</strong></p>
+    <div class="command">
+        https://github.com/seu-usuario/meu-projeto.git
+    </div>
+    <ul>
+        <li>❌ Pede senha toda vez que você faz <code>git push</code> ou <code>git pull</code></li>
+        <li>❌ Desde agosto de 2021, o GitHub não aceita mais senha de conta - você precisa criar um token de acesso pessoal</li>
+        <li>❌ Tokens são longos e difíceis de decorar</li>
+        <li>⚠️ Exemplo de senha que NÃO funciona mais: sua senha normal do GitHub</li>
+    </ul>
+    
+    <p><strong>URL SSH (nova forma - recomendada):</strong></p>
+    <div class="command">
+        git@github.com:seu-usuario/meu-projeto.git
+    </div>
+    <ul>
+        <li>✅ Nunca pede senha (depois da configuração inicial)</li>
+        <li>✅ Autenticação automática via chave SSH</li>
+        <li>✅ Mais seguro e prático</li>
+        <li>✅ É o método usado por desenvolvedores profissionais</li>
+    </ul>
+</div>
+
+<div class="step-box">
+    <h4><strong>Como escolher a URL correta ao clonar:</strong></h4>
+    
+    <p><strong>1. Na página do seu repositório no GitHub:</strong></p>
+    <ul>
+        <li>Clique no botão verde <strong>"Code"</strong></li>
+        <li>Você verá duas abas: <strong>HTTPS</strong> e <strong>SSH</strong></li>
+    </ul>
+    
+    <div class="image-placeholder">
+        🔗 Imagem: Botão "Code" aberto mostrando as abas HTTPS e SSH<br>
+        Destacar a diferença entre as URLs
+    </div>
+    
+    <p><strong>2. Para usar SSH:</strong></p>
+    <ul>
+        <li>Clique na aba <strong>"SSH"</strong> (não HTTPS!)</li>
+        <li>A URL mostrada começará com <code>git@github.com:</code></li>
+        <li>Copie essa URL</li>
+        <li>Use no comando: <code>git clone git@github.com:seu-usuario/meu-projeto.git</code></li>
+    </ul>
+    
+    <p><strong>3. Para verificar qual você está usando em um repositório já clonado:</strong></p>
+    <div class="command">
+        <span class="command-title">Verificar URL do remote:</span>
+        git remote -v
+    </div>
+    
+    <p>Se você ver algo como:</p>
+    <div class="command">
+        origin  https://github.com/usuario/projeto.git (fetch)<br>
+        origin  https://github.com/usuario/projeto.git (push)
+    </div>
+    <p>Você está usando HTTPS (não ideal).</p>
+    
+    <p>Se você ver:</p>
+    <div class="command">
+        origin  git@github.com:usuario/projeto.git (fetch)<br>
+        origin  git@github.com:usuario/projeto.git (push)
+    </div>
+    <p>Você está usando SSH! ✅ (perfeito!)</p>
+</div>
+
+<div class="step-box">
+    <h4><strong>Como mudar de HTTPS para SSH em um repositório já clonado:</strong></h4>
+    <p>Se você já clonou um repositório usando HTTPS e quer mudar para SSH, não precisa clonar tudo de novo! Basta atualizar a URL:</p>
+    
+    <div class="command">
+        <span class="command-title">1. Entre na pasta do repositório:</span>
+        cd nome-do-repositorio
+    </div>
+    
+    <div class="command">
+        <span class="command-title">2. Verifique a URL atual:</span>
+        git remote -v
+    </div>
+    
+    <div class="command">
+        <span class="command-title">3. Mude para SSH (substitua seu-usuario e nome-do-repo):</span>
+        git remote set-url origin git@github.com:seu-usuario/nome-do-repo.git
+    </div>
+    
+    <div class="command">
+        <span class="command-title">4. Verifique se mudou:</span>
+        git remote -v
+    </div>
+    
+    <p>Agora você pode fazer <code>git push</code> e <code>git pull</code> sem digitar senha!</p>
+</div>
+
+<div class="step-box">
+    <h4><strong>Exemplo prático completo:</strong></h4>
+    <p><strong>Cenário:</strong> Você quer clonar o repositório "meu-site-portfolio" da sua conta GitHub.</p>
+    
+    <p><strong>❌ Forma antiga (HTTPS):</strong></p>
+    <div class="command">
+        git clone https://github.com/joao-silva/meu-site-portfolio.git<br>
+        # Ao fazer git push, pedirá: username e token (toda vez!)
+    </div>
+    
+    <p><strong>✅ Forma correta (SSH):</strong></p>
+    <div class="command">
+        git clone git@github.com:joao-silva/meu-site-portfolio.git<br>
+        # Ao fazer git push, não pede nada! Funciona automaticamente!
+    </div>
+</div>
+
+<div class="step-box">
+    <h4><strong>Testando se sua configuração SSH está funcionando:</strong></h4>
+    <p>Antes de clonar qualquer repositório, teste sua conexão SSH:</p>
+    
+    <div class="command">
+        <span class="command-title">Testar conexão SSH:</span>
+        ssh -T git@github.com
+    </div>
+    
+    <p><strong>Resposta esperada se estiver tudo certo:</strong></p>
+    <div class="command">
+        Hi seu-usuario! You've successfully authenticated, but GitHub does not provide shell access.
+    </div>
+    
+    <p>Se você receber essa mensagem, significa que:</p>
+    <ul>
+        <li>✅ Sua chave SSH está configurada corretamente</li>
+        <li>✅ O GitHub reconheceu sua chave</li>
+        <li>✅ Você pode clonar e fazer push sem senha</li>
+        <li>✅ Está tudo pronto para usar!</li>
+    </ul>
+    
+    <div class="warning-box">
+        <p class="warning-icon"><strong>Se receber erro "Permission denied":</strong></p>
+        <ul>
+            <li>Volte para a seção 6.5 e verifique se adicionou a chave correta no GitHub</li>
+            <li>Verifique se está usando a chave pública (.pub) no GitHub</li>
+            <li>Tente gerar uma nova chave se necessário</li>
+        </ul>
+    </div>
+</div>
+
+<div class="success-box">
+    <h4><strong>Resumo - Sempre use SSH:</strong></h4>
+    
+    <p>🔐 <strong>Para clonar novos repositórios:</strong></p>
+    <div class="command">
+        git clone git@github.com:usuario/repositorio.git
+    </div>
+    
+    <p>🔄 <strong>Para mudar repositórios existentes:</strong></p>
+    <div class="command">
+        git remote set-url origin git@github.com:usuario/repositorio.git
+    </div>
+    
+    <p>✅ <strong>Para testar conexão:</strong></p>
+    <div class="command">
+        ssh -T git@github.com
+    </div>
+    
+    <p style="margin-top: 15px;"><strong>Benefício:</strong> Depois de configurar SSH uma única vez, você nunca mais precisará digitar senha ou token ao trabalhar com GitHub! É como ter uma "carteirinha de acesso" permanente e segura. 🎫</p>
+</div>
+                </div>
+
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Solução de problemas:</strong></p>
+                    <ul>
+                        <li><strong>Se aparecer "Permission denied":</strong> Verifique se você adicionou a chave correta no GitHub</li>
+                        <li><strong>Se aparecer "ssh: connect to host github.com port 22":</strong> Pode ser problema de firewall ou rede</li>
+                        <li><strong>Se tiver problemas:</strong> Tente usar HTTPS por enquanto e configure SSH depois</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 id="primeiro-repositorio">7. Criando seu Primeiro Repositório no GitHub</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O que é um repositório?</strong></p>
+                <p>Um repositório (ou "repo") é como uma pasta de projeto que o Git monitora. Ele contém todos os seus arquivos e o histórico completo de mudanças. Pense nele como uma "pasta especial" onde o Git guarda todo o histórico do seu projeto.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Acessar o GitHub</strong></p>
+                <p>Entre no site <code>https://github.com</code> e faça login com sua conta.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Criar novo repositório</strong></p>
+                <p>Clique no botão <strong>"+"</strong> no canto superior direito e selecione <strong>"New repository"</strong></p>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/criar_repositorio.png" alt="criar_repositorio">
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Configurar o repositório</strong></p>
+                <p>Preencha as informações do seu novo repositório:</p>
+                
+                <ul>
+                    <li><strong>Repository name (Nome do repositório):</strong> Escolha um nome descritivo, sem espaços
+                        <div class="info-box" style="margin-top: 10px;">
+                            <p class="tip-icon">Exemplos: <code>meu-primeiro-projeto</code>, <code>calculadora-python</code>, <code>site-portfolio</code></p>
+                            <p>Use letras minúsculas e hífens para separar palavras</p>
+                        </div>
+                    </li>
+                    <li><strong>Description (Descrição):</strong> (Opcional) Uma breve descrição do que é o projeto</li>
+                    <li><strong>Public ou Private:</strong> 
+                        <ul>
+                            <li><strong>Public:</strong> Qualquer pessoa pode ver (recomendado para aprender)</li>
+                            <li><strong>Private:</strong> Só você e pessoas autorizadas podem ver</li>
+                        </ul>
+                    </li>
+                    <li><strong>Initialize this repository with:</strong>
+                        <ul>
+                            <li>✅ <strong>Marque "Add a README file"</strong> - Cria um arquivo README.md automaticamente (RECOMENDADO)</li>
+                            <li><strong>Add .gitignore:</strong> (Opcional) Escolha uma template se quiser (ex: Python, Node, Java)</li>
+                            <li><strong>Choose a license:</strong> (Opcional) Você pode adicionar depois</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    <img class="imagens" width="800px"  src="./image/form_criar_repositorio.png" alt="form_criar_repositorio">
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">4</span><strong>Criar o repositório</strong></p>
+                <p>Clique no botão verde <strong>"Create repository"</strong></p>
+            </div>
+
+            <div class="success-box">
+                <p class="success-icon"><strong>Parabéns! Seu primeiro repositório foi criado!</strong></p>
+                <p>Você será redirecionado para a página do seu repositório. Aqui você pode ver:</p>
+                <ul>
+                    <li>O arquivo README.md que foi criado</li>
+                    <li>Um botão verde <strong>"Code"</strong> (vamos usar ele no próximo passo)</li>
+                    <li>Várias abas: Code, Issues, Pull requests, etc.</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    🎉 Imagem: Página do repositório recém-criado<br>
+                    Mostrando o README.md e botão "Code"
+                </div>
+            </div>
+
+            <h2 id="clonar">8. Clonando um Repositório</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O que é clonar?</strong></p>
+                <p>Clonar significa fazer uma cópia completa do repositório do GitHub para o seu computador. Você baixa todos os arquivos e todo o histórico de mudanças. É diferente de apenas baixar os arquivos - quando você clona, você tem uma conexão ativa com o repositório no GitHub.</p>
+            </div>
+
+            <h3>Método 1: Usando Git Bash (Linha de Comando)</h3>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Copiar a URL do repositório</strong></p>
+                <p>Na página do seu repositório no GitHub:</p>
+                <ul>
+                    <li>Clique no botão verde <strong>"Code"</strong></li>
+                    <li>Se você configurou SSH, clique na aba <strong>"SSH"</strong>. Caso contrário, use <strong>"HTTPS"</strong></li>
+                    <li>Clique no ícone de copiar ao lado da URL</li>
+                </ul>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Diferença entre SSH e HTTPS:</strong></p>
+                    <ul>
+                        <li><strong>SSH:</strong> URL começa com <code>git@github.com...</code> - Não pede senha (se você configurou)</li>
+                        <li><strong>HTTPS:</strong> URL começa com <code>https://github.com...</code> - Pode pedir senha</li>
+                    </ul>
+                </div>
+                
+                <div class="image-placeholder">
+                    📋 Imagem: Botão "Code" aberto<br>
+                    Mostrando as abas SSH e HTTPS com as URLs
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Escolher onde salvar</strong></p>
+                <p>Abra o Git Bash e navegue até a pasta onde quer salvar o projeto. Por exemplo:</p>
+                
+                <div class="command">
+                    <span class="command-title">Ir para a pasta Documentos:</span>
+                    cd ~/Documents
+                </div>
+                
+                <p>Ou crie uma pasta específica para seus projetos:</p>
+                <div class="command">
+                    <span class="command-title">Criar pasta para projetos:</span>
+                    mkdir meus-projetos<br>
+                    cd meus-projetos
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">3</span><strong>Clonar o repositório</strong></p>
+                <p>Agora use o comando <code>git clone</code> seguido da URL que você copiou:</p>
+                
+                <div class="command">
+                    <span class="command-title">Clonar repositório:</span>
+                    git clone URL-que-você-copiou
+                </div>
+                
+                <p><strong>Exemplo com SSH:</strong></p>
+                <div class="command">
+                    git clone git@github.com:seu-usuario/meu-primeiro-projeto.git
+                </div>
+                
+                <p><strong>Exemplo com HTTPS:</strong></p>
+                <div class="command">
+                    git clone https://github.com/seu-usuario/meu-primeiro-projeto.git
+                </div>
+                
+                <div class="image-placeholder">
+                    💻 Imagem: Git Bash executando git clone<br>
+                    Mostrando o progresso do download
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">4</span><strong>Entrar na pasta do projeto</strong></p>
+                <p>Após a clonagem, uma nova pasta será criada com o nome do repositório. Entre nela:</p>
+                
+                <div class="command">
+                    <span class="command-title">Entrar na pasta do projeto:</span>
+                    cd nome-do-seu-repositorio
+                </div>
+                
+                <p><strong>Exemplo:</strong></p>
+                <div class="command">
+                    cd meu-primeiro-projeto
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">5</span><strong>Verificar o status</strong></p>
+                <p>Para confirmar que está tudo certo, digite:</p>
+                
+                <div class="command">
+                    <span class="command-title">Verificar status do repositório:</span>
+                    git status
+                </div>
+                
+                <p>Você deve ver algo como:</p>
+                <div class="command">
+                    On branch main<br>
+                    Your branch is up to date with 'origin/main'.<br>
+                    nothing to commit, working tree clean
+                </div>
+                
+                <p>Isso significa que está tudo funcionando perfeitamente!</p>
+            </div>
+
+            <h3>Método 2: Usando GitHub Desktop</h3>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Abrir o GitHub Desktop</strong></p>
+                <p>Abra o aplicativo GitHub Desktop no seu computador.</p>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Clonar repositório</strong></p>
+                <p>Você pode clonar de duas formas:</p>
+                
+                <p><strong>Forma A - Pelo aplicativo:</strong></p>
+                <ul>
+                    <li>Clique em <strong>File</strong> → <strong>Clone repository</strong></li>
+                    <li>Na aba <strong>GitHub.com</strong>, você verá todos os seus repositórios</li>
+                    <li>Selecione o repositório que quer clonar</li>
+                    <li>Escolha onde salvar (Local path)</li>
+                    <li>Clique em <strong>Clone</strong></li>
+                </ul>
+                
+                <p><strong>Forma B - Pelo site do GitHub:</strong></p>
+                <ul>
+                    <li>Na página do repositório no GitHub, clique em <strong>Code</strong></li>
+                    <li>Clique em <strong>Open with GitHub Desktop</strong></li>
+                    <li>O GitHub Desktop abrirá automaticamente</li>
+                    <li>Escolha onde salvar e clique em <strong>Clone</strong></li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    💻 Imagem: GitHub Desktop<br>
+                    Mostrando a tela de clone de repositório
+                </div>
+            </div>
+
+            <div class="success-box">
+                <p class="success-icon"><strong>Repositório clonado com sucesso!</strong></p>
+                <p>Agora você tem uma cópia local do seu repositório e pode começar a trabalhar nele!</p>
+            </div>
+
+            <h2 id="comandos-basicos">9. Comandos Básicos do Git</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>O ciclo básico do Git</strong></p>
+                <p>Trabalhar com Git geralmente segue este fluxo:</p>
+                <ol>
+                    <li><strong>Modificar</strong> arquivos no seu computador</li>
+                    <li><strong>Add</strong> (adicionar) as mudanças para a área de preparação</li>
+                    <li><strong>Commit</strong> (confirmar) as mudanças com uma mensagem</li>
+                    <li><strong>Push</strong> (enviar) as mudanças para o GitHub</li>
+                </ol>
+                <p>Vamos entender cada passo em detalhes!</p>
+            </div>
+
+            <h3>9.1) git status - Ver o estado atual</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Mostra quais arquivos foram modificados, adicionados ou deletados.</p>
+                
+                <div class="command">
+                    <span class="command-title">Verificar status:</span>
+                    git status
+                </div>
+                
+                <p><strong>Quando usar:</strong> Use sempre que quiser saber o que está acontecendo no seu repositório. É o comando mais usado!</p>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Interpretando o resultado:</strong></p>
+                    <ul>
+                        <li><strong>Verde:</strong> Arquivos prontos para commit (já foram adicionados)</li>
+                        <li><strong>Vermelho:</strong> Arquivos modificados mas ainda não adicionados</li>
+                        <li><strong>"Untracked files":</strong> Arquivos novos que o Git ainda não conhece</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>9.2) git add - Adicionar mudanças</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Prepara as mudanças para serem salvas (adiciona à "staging area").</p>
+                
+                <p><strong>Adicionar um arquivo específico:</strong></p>
+                <div class="command">
+                    <span class="command-title">Adicionar arquivo específico:</span>
+                    git add nome-do-arquivo.txt
+                </div>
+                
+                <p><strong>Adicionar TODOS os arquivos modificados:</strong></p>
+                <div class="command">
+                    <span class="command-title">Adicionar todos os arquivos:</span>
+                    git add .
+                </div>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Cuidado com o "git add ."</strong></p>
+                    <p>O ponto (.) adiciona TUDO. Certifique-se de que realmente quer adicionar todos os arquivos modificados. Use <code>git status</code> antes para verificar!</p>
+                </div>
+                
+                <p><strong>Adicionar múltiplos arquivos específicos:</strong></p>
+                <div class="command">
+                    <span class="command-title">Adicionar vários arquivos:</span>
+                    git add arquivo1.txt arquivo2.js arquivo3.css
+                </div>
+            </div>
+
+            <h3>9.3) git commit - Salvar as mudanças</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Salva oficialmente as mudanças no histórico do Git com uma mensagem descritiva.</p>
+                
+                <div class="command">
+                    <span class="command-title">Criar um commit:</span>
+                    git commit -m "Sua mensagem descritiva aqui"
+                </div>
+                
+                <p><strong>Exemplos de boas mensagens:</strong></p>
+                <div class="command">
+                    git commit -m "Adiciona página inicial do site"<br>
+                    git commit -m "Corrige bug no formulário de login"<br>
+                    git commit -m "Atualiza documentação do projeto"
+                </div>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Dicas para mensagens de commit:</strong></p>
+                    <ul>
+                        <li>Use frases curtas e descritivas</li>
+                        <li>Comece com um verbo no infinitivo ou imperativo: "Adiciona", "Corrige", "Atualiza", "Remove"</li>
+                        <li>Seja específico: "Corrige erro na calculadora" é melhor que "Corrige bug"</li>
+                        <li>Escreva em português ou inglês, mas seja consistente</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Importante:</strong> Sempre faça <code>git add</code> ANTES de <code>git commit</code>!</p>
+                </div>
+            </div>
+
+            <h3>9.4) git push - Enviar para o GitHub</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Envia todos os commits do seu computador para o repositório no GitHub.</p>
+                
+                <div class="command">
+                    <span class="command-title">Enviar mudanças para o GitHub:</span>
+                    git push
+                </div>
+                
+                <p>Ou de forma mais completa (especialmente na primeira vez):</p>
+                <div class="command">
+                    <span class="command-title">Push especificando origem e branch:</span>
+                    git push origin main
+                </div>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Entendendo o comando:</strong></p>
+                    <ul>
+                        <li><strong>origin:</strong> É o nome padrão do repositório remoto (no GitHub)</li>
+                        <li><strong>main:</strong> É o nome da branch principal (pode ser "master" em repositórios mais antigos)</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Se você está enviando pela primeira vez:</strong></p>
+                <div class="command">
+                    <span class="command-title">Configurar upstream (primeira vez):</span>
+                    git push -u origin main
+                </div>
+                <p>O <code>-u</code> configura o tracking, então nos próximos push você pode usar apenas <code>git push</code></p>
+            </div>
+
+            <h3>9.5) git pull - Baixar atualizações</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Baixa as atualizações do GitHub para o seu computador (o oposto de push).</p>
+                
+                <div class="command">
+                    <span class="command-title">Baixar atualizações:</span>
+                    git pull
+                </div>
+                
+                <p><strong>Quando usar:</strong></p>
+                <ul>
+                    <li>Quando você trabalha em múltiplos computadores</li>
+                    <li>Quando trabalha em equipe e outras pessoas fizeram mudanças</li>
+                    <li>Quando você editou algo diretamente no GitHub</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Boa prática:</strong> Sempre faça <code>git pull</code> antes de começar a trabalhar para ter a versão mais recente!</p>
+                </div>
+            </div>
+
+            <h3>9.6) git log - Ver histórico</h3>
+
+            <div class="step-box">
+                <p><strong>O que faz:</strong> Mostra o histórico de commits (todas as mudanças salvas).</p>
+                
+                <div class="command">
+                    <span class="command-title">Ver histórico completo:</span>
+                    git log
+                </div>
+                
+                <p><strong>Ver histórico resumido (mais bonito):</strong></p>
+                <div class="command">
+                    <span class="command-title">Histórico resumido em uma linha:</span>
+                    git log --oneline
+                </div>
+                
+                <p><strong>Ver últimos 5 commits:</strong></p>
+                <div class="command">
+                    <span class="command-title">Ver últimos commits:</span>
+                    git log -5
+                </div>
+                
+                <p><strong>Para sair do log:</strong> Pressione a tecla <code>Q</code></p>
+            </div>
+
+            <h3>9.7) Fluxo de trabalho completo - Exemplo prático</h3>
+
+            <div class="step-box">
+                <p>Vamos simular um fluxo de trabalho real, passo a passo:</p>
+                
+                <p><strong>Cenário:</strong> Você criou um arquivo chamado <code>index.html</code> no seu projeto.</p>
+                
+                <div class="command">
+                    <span class="command-title">1. Verificar o que mudou:</span>
+                    git status
+                </div>
+                <p><em>Resultado: Você verá "index.html" em vermelho (untracked file)</em></p>
+                
+                <div class="command">
+                    <span class="command-title">2. Adicionar o arquivo:</span>
+                    git add index.html
+                </div>
+                
+                <div class="command">
+                    <span class="command-title">3. Verificar novamente:</span>
+                    git status
+                </div>
+                <p><em>Resultado: Agora "index.html" aparece em verde (pronto para commit)</em></p>
+                
+                <div class="command">
+                    <span class="command-title">4. Fazer o commit:</span>
+                    git commit -m "Adiciona página inicial HTML"
+                </div>
+                
+                <div class="command">
+                    <span class="command-title">5. Enviar para o GitHub:</span>
+                    git push
+                </div>
+                
+                <div class="success-box">
+                    <p class="success-icon"><strong>Pronto!</strong> Suas mudanças agora estão no GitHub. Acesse seu repositório no site e você verá o arquivo lá!</p>
+                </div>
+            </div>
+
+            <h2 id="vscode">10. Integrando Git com VS Code</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>Por que usar VS Code com Git?</strong></p>
+                <p>O Visual Studio Code tem uma integração nativa com Git, permitindo que você use Git de forma visual sem precisar digitar comandos. É perfeito para quem está começando!</p>
+            </div>
+
+            <h3>10.1) Instalando o VS Code</h3>
+
+            <div class="step-box">
+                <p><span class="step-number">1</span><strong>Baixar o VS Code:</strong></p>
+                <p>Acesse: <code>https://code.visualstudio.com</code></p>
+                <p>Clique em "Download" e escolha a versão para seu sistema operacional.</p>
+                
+                <div class="image-placeholder">
+                    🌐 Imagem: Página de download do VS Code<br>
+                    Mostrando opções para Windows, Mac e Linux
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><span class="step-number">2</span><strong>Instalar:</strong></p>
+                <p>Execute o instalador e siga as instruções. Recomenda-se marcar as seguintes opções durante a instalação:</p>
+                <ul>
+                    <li>✅ Add "Open with Code" action to Windows Explorer file context menu</li>
+                    <li>✅ Add "Open with Code" action to Windows Explorer directory context menu</li>
+                    <li>✅ Register Code as an editor for supported file types</li>
+                    <li>✅ Add to PATH</li>
+                </ul>
+            </div>
+
+            <h3>10.2) Abrindo seu projeto no VS Code</h3>
+
+            <div class="step-box">
+                <p><strong>Opção 1 - Pelo VS Code:</strong></p>
+                <ul>
+                    <li>Abra o VS Code</li>
+                    <li>Clique em <strong>File</strong> → <strong>Open Folder</strong></li>
+                    <li>Navegue até a pasta do seu repositório clonado</li>
+                    <li>Selecione a pasta e clique em "Selecionar pasta"</li>
+                </ul>
+                
+                <p><strong>Opção 2 - Pelo Git Bash:</strong></p>
+                <div class="command">
+                    <span class="command-title">Abrir projeto no VS Code pelo terminal:</span>
+                    cd seu-repositorio<br>
+                    code .
+                </div>
+                <p>O ponto (.) significa "pasta atual"</p>
+                
+                <p><strong>Opção 3 - Pelo Windows Explorer:</strong></p>
+                <p>Se você marcou as opções durante a instalação, basta clicar com o botão direito na pasta do projeto e selecionar "Open with Code"</p>
+            </div>
+
+            <h3>10.3) Usando Git dentro do VS Code</h3>
+
+            <div class="step-box">
+                <p><strong>Painel de Source Control (Controle de Código):</strong></p>
+                <p>No VS Code, clique no ícone de "Source Control" na barra lateral esquerda (parece uma ramificação ou tem o número de mudanças pendentes).</p>
+                
+                <div class="image-placeholder">
+                    📊 Imagem: VS Code com painel Source Control aberto<br>
+                    Mostrando arquivos modificados listados
+                </div>
+                
+                <p><strong>O que você vê aqui:</strong></p>
+                <ul>
+                    <li><strong>Changes (Mudanças):</strong> Arquivos que foram modificados</li>
+                    <li><strong>Staged Changes:</strong> Arquivos prontos para commit (após git add)</li>
+                    <li>Cada arquivo tem uma letra ao lado:
+                        <ul>
+                            <li><strong>M</strong> = Modified (modificado)</li>
+                            <li><strong>U</strong> = Untracked (novo arquivo)</li>
+                            <li><strong>D</strong> = Deleted (deletado)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <p><strong>Fazendo commit pelo VS Code:</strong></p>
+                
+                <p><span class="step-number">1</span> <strong>Adicionar arquivos (git add):</strong></p>
+                <ul>
+                    <li>Passe o mouse sobre o arquivo que deseja adicionar</li>
+                    <li>Clique no ícone <strong>"+"</strong> que aparece</li>
+                    <li>Ou clique no <strong>"+"</strong> ao lado de "Changes" para adicionar todos</li>
+                </ul>
+                
+                <p><span class="step-number">2</span> <strong>Fazer commit:</strong></p>
+                <ul>
+                    <li>Digite sua mensagem de commit na caixa de texto no topo</li>
+                    <li>Clique no botão <strong>"✓ Commit"</strong> (ou pressione Ctrl+Enter)</li>
+                </ul>
+                
+                <p><span class="step-number">3</span> <strong>Enviar para GitHub (git push):</strong></p>
+                <ul>
+                    <li>Clique nos três pontos (...) no painel Source Control</li>
+                    <li>Selecione <strong>"Push"</strong></li>
+                    <li>Ou clique no ícone de sincronização (↻) na barra inferior</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    💻 Imagem: Sequência de commit no VS Code<br>
+                    Mostrando: adicionar arquivo → mensagem → commit → push
+                </div>
+            </div>
+
+            <div class="step-box">
+                <p><strong>Ver diferenças (o que foi modificado):</strong></p>
+                <ul>
+                    <li>No painel Source Control, clique em qualquer arquivo modificado</li>
+                    <li>Uma janela abrirá mostrando:
+                        <ul>
+                            <li><strong>Esquerda:</strong> Versão antiga</li>
+                            <li><strong>Direita:</strong> Versão nova</li>
+                            <li><strong>Verde:</strong> Linhas adicionadas</li>
+                            <li><strong>Vermelho:</strong> Linhas removidas</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>10.4) Extensões úteis do VS Code para Git</h3>
+
+            <div class="step-box">
+                <p>Para instalar extensões, clique no ícone de extensões (quadrado com peças de quebra-cabeça) na barra lateral.</p>
+                
+                <p><strong>Extensões recomendadas:</strong></p>
+                <ul>
+                    <li><strong>GitLens:</strong> Mostra informações detalhadas sobre commits e autores</li>
+                    <li><strong>Git Graph:</strong> Visualiza o histórico de commits em forma de gráfico</li>
+                    <li><strong>Git History:</strong> Visualiza e pesquisa o histórico do Git</li>
+                </ul>
+                
+                <div class="image-placeholder">
+                    🧩 Imagem: Marketplace de extensões do VS Code<br>
+                    Mostrando extensões Git disponíveis
+                </div>
+            </div>
+
+            <h2 id="workflow">11. Fluxo de Trabalho Completo - Exemplo Real</h2>
+
+            <div class="info-box">
+                <p class="tip-icon"><strong>Vamos criar um projeto completo do zero!</strong></p>
+                <p>Este exemplo mostra todo o processo, desde a criação até o envio para o GitHub.</p>
+            </div>
+
+            <div class="step-box">
+                <h3>Projeto: Criar um site simples</h3>
+                
+                <p><span class="step-number">1</span> <strong>Criar o repositório no GitHub</strong></p>
+                <ul>
+                    <li>Entre no GitHub e crie um novo repositório chamado "meu-site"</li>
+                    <li>Marque "Add a README file"</li>
+                    <li>Clique em "Create repository"</li>
+                </ul>
+                
+                <p><span class="step-number">2</span> <strong>Clonar para seu computador</strong></p>
+                <div class="command">
+                    cd ~/Documents/meus-projetos<br>
+                    git clone git@github.com:seu-usuario/meu-site.git<br>
+                    cd meu-site
+                </div>
+                
+                <p><span class="step-number">3</span> <strong>Abrir no VS Code</strong></p>
+                <div class="command">
+                    code .
+                </div>
+                
+                <p><span class="step-number">4</span> <strong>Criar um arquivo HTML</strong></p>
+                <p>No VS Code, crie um novo arquivo chamado <code>index.html</code> com o seguinte conteúdo:</p>
+                <div class="command">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html&gt;<br>
+                    &lt;head&gt;<br>
+                        &nbsp;&nbsp;&lt;title&gt;Meu Primeiro Site&lt;/title&gt;<br>
+                    &lt;/head&gt;<br>
+                    &lt;body&gt;<br>
+                        &nbsp;&nbsp;&lt;h1&gt;Olá, GitHub!&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&lt;p&gt;Este é meu primeiro site usando Git e GitHub.&lt;/p&gt;<br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+                <p>Salve o arquivo (Ctrl+S)</p>
+                
+                <p><span class="step-number">5</span> <strong>Verificar status</strong></p>
+                <div class="command">
+                    git status
+                </div>
+                <p>Você verá que <code>index.html</code> aparece como arquivo não rastreado (vermelho)</p>
+                
+                <p><span class="step-number">6</span> <strong>Adicionar o arquivo</strong></p>
+                <div class="command">
+                    git add index.html
+                </div>
+                
+                <p><span class="step-number">7</span> <strong>Fazer commit</strong></p>
+                <div class="command">
+                    git commit -m "Adiciona página inicial do site"
+                </div>
+                
+                <p><span class="step-number">8</span> <strong>Enviar para o GitHub</strong></p>
+                <div class="command">
+                    git push
+                </div>
+                
+                <p><span class="step-number">9</span> <strong>Verificar no GitHub</strong></p>
+                <p>Abra seu repositório no GitHub pelo navegador. Você verá o arquivo <code>index.html</code> lá!</p>
+                
+                <div class="success-box">
+                    <p class="success-icon"><strong>Parabéns! Você completou seu primeiro projeto com Git e GitHub!</strong></p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>Continuando o projeto - Fazendo modificações</h3>
+                
+                <p><span class="step-number">10</span> <strong>Editar o arquivo</strong></p>
+                <p>Abra o <code>index.html</code> e adicione mais conteúdo:</p>
+                <div class="command">
+                    &lt;p&gt;Estou aprendendo Git e está sendo incrível!&lt;/p&gt;
+                </div>
+                <p>Salve o arquivo</p>
+                
+                <p><span class="step-number">11</span> <strong>Ver as diferenças</strong></p>
+                <div class="command">
+                    git diff
+                </div>
+                <p>Isso mostra exatamente o que mudou no arquivo</p>
+                
+                <p><span class="step-number">12</span> <strong>Adicionar, commitar e enviar</strong></p>
+                <div class="command">
+                    git add index.html<br>
+                    git commit -m "Adiciona mais conteúdo à página"<br>
+                    git push
+                </div>
+                
+                <p><span class="step-number">13</span> <strong>Ver o histórico</strong></p>
+                <div class="command">
+                    git log --oneline
+                </div>
+                <p>Você verá todos os commits que fez até agora!</p>
+            </div>
+
+            <h2 id="comandos-avancados">12. Outros Comandos Importantes</h2>
+
+            <div class="step-box">
+                <h3>12.1) git diff - Ver diferenças</h3>
+                <p><strong>Ver mudanças não adicionadas:</strong></p>
+                <div class="command">
+                    <span class="command-title">Ver o que mudou (antes do git add):</span>
+                    git diff
+                </div>
+                
+                <p><strong>Ver mudanças já adicionadas:</strong></p>
+                <div class="command">
+                    <span class="command-title">Ver mudanças staged:</span>
+                    git diff --staged
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.2) git restore - Desfazer mudanças</h3>
+                <p><strong>Descartar mudanças em um arquivo (antes do git add):</strong></p>
+                <div class="command">
+                    <span class="command-title">Desfazer mudanças não salvas:</span>
+                    git restore nome-do-arquivo.txt
+                </div>
+                
+                <p><strong>Remover arquivo da staging area (depois do git add):</strong></p>
+                <div class="command">
+                    <span class="command-title">Remover do staging (desfazer git add):</span>
+                    git restore --staged nome-do-arquivo.txt
+                </div>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Atenção:</strong> <code>git restore</code> sem --staged apaga suas mudanças permanentemente!</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.3) git branch - Trabalhando com ramificações</h3>
+                <p><strong>Ver branches existentes:</strong></p>
+                <div class="command">
+                    <span class="command-title">Listar branches:</span>
+                    git branch
+                </div>
+                
+                <p><strong>Criar uma nova branch:</strong></p>
+                <div class="command">
+                    <span class="command-title">Criar branch:</span>
+                    git branch nome-da-branch
+                </div>
+                
+                <p><strong>Mudar de branch:</strong></p>
+                <div class="command">
+                    <span class="command-title">Trocar de branch:</span>
+                    git checkout nome-da-branch
+                </div>
+                
+                <p><strong>Criar e mudar ao mesmo tempo:</strong></p>
+                <div class="command">
+                    <span class="command-title">Criar e mudar para nova branch:</span>
+                    git checkout -b nova-branch
+                </div>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>O que são branches?</strong></p>
+                    <p>Branches são ramificações do seu projeto. Imagine que você quer testar uma nova funcionalidade sem bagunçar o código principal. Você cria uma branch, trabalha nela, e quando estiver tudo funcionando, você une (merge) com a branch principal.</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.4) git merge - Unir branches</h3>
+                <p><strong>Unir uma branch com a branch atual:</strong></p>
+                <div class="command">
+                    <span class="command-title">Primeiro, vá para a branch que receberá as mudanças:</span>
+                    git checkout main
+                </div>
+                <div class="command">
+                    <span class="command-title">Depois, faça o merge:</span>
+                    git merge nome-da-branch
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.5) git rm - Remover arquivos</h3>
+                <p><strong>Remover arquivo do repositório:</strong></p>
+                <div class="command">
+                    <span class="command-title">Remover arquivo:</span>
+                    git rm nome-do-arquivo.txt<br>
+                    git commit -m "Remove arquivo desnecessário"
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.6) git mv - Renomear/mover arquivos</h3>
+                <p><strong>Renomear um arquivo:</strong></p>
+                <div class="command">
+                    <span class="command-title">Renomear arquivo:</span>
+                    git mv nome-antigo.txt nome-novo.txt<br>
+                    git commit -m "Renomeia arquivo"
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.7) .gitignore - Ignorar arquivos</h3>
+                <p><strong>O que é:</strong> Um arquivo especial que diz ao Git quais arquivos/pastas ignorar.</p>
+                
+                <p><strong>Como criar:</strong></p>
+                <p>Crie um arquivo chamado <code>.gitignore</code> na raiz do seu projeto e adicione os arquivos/pastas a ignorar:</p>
+                
+                <div class="command">
+                    <span class="command-title">Exemplo de .gitignore:</span>
+                    # Ignorar arquivos de configuração<br>
+                    .env<br>
+                    config.json<br>
+                    <br>
+                    # Ignorar node_modules<br>
+                    node_modules/<br>
+                    <br>
+                    # Ignorar arquivos do sistema<br>
+                    .DS_Store<br>
+                    Thumbs.db<br>
+                    <br>
+                    # Ignorar arquivos temporários<br>
+                    *.log<br>
+                    *.tmp
+                </div>
+                
+                <div class="info-box">
+                    <p class="tip-icon"><strong>Quando usar .gitignore:</strong></p>
+                    <ul>
+                        <li>Arquivos com senhas ou informações sensíveis</li>
+                        <li>Dependências que podem ser baixadas novamente (node_modules, etc.)</li>
+                        <li>Arquivos gerados automaticamente</li>
+                        <li>Arquivos temporários do sistema operacional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>12.8) Tabela de Comandos - Resumo Rápido</h3>
+                
+                <table>
+                    <tr>
+                        <th>Comando</th>
+                        <th>O que faz</th>
+                    </tr>
+                    <tr>
+                        <td><code>git init</code></td>
+                        <td>Cria um novo repositório Git local</td>
+                    </tr>
+                    <tr>
+                        <td><code>git clone [url]</code></td>
+                        <td>Clona um repositório do GitHub</td>
+                    </tr>
+                    <tr>
+                        <td><code>git status</code></td>
+                        <td>Mostra o estado atual dos arquivos</td>
+                    </tr>
+                    <tr>
+                        <td><code>git add [arquivo]</code></td>
+                        <td>Adiciona arquivo para commit</td>
+                    </tr>
+                    <tr>
+                        <td><code>git add .</code></td>
+                        <td>Adiciona todos os arquivos modificados</td>
+                    </tr>
+                    <tr>
+                        <td><code>git commit -m "msg"</code></td>
+                        <td>Salva as mudanças com uma mensagem</td>
+                    </tr>
+                    <tr>
+                        <td><code>git push</code></td>
+                        <td>Envia commits para o GitHub</td>
+                    </tr>
+                    <tr>
+                        <td><code>git pull</code></td>
+                        <td>Baixa atualizações do GitHub</td>
+                    </tr>
+                    <tr>
+                        <td><code>git log</code></td>
+                        <td>Mostra histórico de commits</td>
+                    </tr>
+                    <tr>
+                        <td><code>git log --oneline</code></td>
+                        <td>Histórico resumido</td>
+                    </tr>
+                    <tr>
+                        <td><code>git diff</code></td>
+                        <td>Mostra diferenças não adicionadas</td>
+                    </tr>
+                    <tr>
+                        <td><code>git branch</code></td>
+                        <td>Lista branches</td>
+                    </tr>
+                    <tr>
+                        <td><code>git checkout [branch]</code></td>
+                        <td>Muda de branch</td>
+                    </tr>
+                    <tr>
+                        <td><code>git checkout -b [branch]</code></td>
+                        <td>Cria e muda para nova branch</td>
+                    </tr>
+                    <tr>
+                        <td><code>git merge [branch]</code></td>
+                        <td>Une branches</td>
+                    </tr>
+                    <tr>
+                        <td><code>git restore [arquivo]</code></td>
+                        <td>Descarta mudanças não salvas</td>
+                    </tr>
+                    <tr>
+                        <td><code>git rm [arquivo]</code></td>
+                        <td>Remove arquivo do repositório</td>
+                    </tr>
+                    <tr>
+                        <td><code>git mv [antigo] [novo]</code></td>
+                        <td>Renomeia ou move arquivo</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="success-box">
+                <h3 class="success-icon">Parabéns! Você concluiu o manual!</h3>
+                <p>Agora você tem todo o conhecimento necessário para começar a usar Git e GitHub nos seus projetos. Lembre-se:</p>
+                <ul>
+                    <li><strong>Pratique bastante!</strong> A melhor forma de aprender é fazendo</li>
+                    <li><strong>Comece simples:</strong> Use os comandos básicos primeiro (add, commit, push)</li>
+                    <li><strong>Não tenha medo de errar:</strong> O Git permite desfazer mudanças</li>
+                    <li><strong>Use o GitHub:</strong> É ótimo para construir seu portfólio</li>
+                    <li><strong>Consulte este manual:</strong> Sempre que tiver dúvidas, volte aqui!</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3 class="tip-icon">Próximos Passos</h3>
+                <p><strong>Para continuar aprendendo:</strong></p>
+                <ul>
+                    <li>Explore projetos open source no GitHub</li>
+                    <li>Aprenda sobre Pull Requests (colaboração em projetos)</li>
+                    <li>Estude sobre GitHub Actions (automação)</li>
+                    <li>Pratique criando projetos pessoais e enviando para o GitHub</li>
+                    <li>Aprenda sobre Git Flow (metodologia de trabalho em equipe)</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h3 class="warning-icon">Problemas Comuns e Soluções</h3>
+                
+                <p><strong>1. "Permission denied" ao fazer push:</strong></p>
+                <ul>
+                    <li>Verifique se você configurou a chave SSH corretamente</li>
+                    <li>Ou use HTTPS e verifique suas credenciais</li>
+                </ul>
+                
+                <p><strong>2. "fatal: not a git repository":</strong></p>
+                <ul>
+                    <li>Você está na pasta errada</li>
+                    <li>Use <code>cd</code> para navegar até a pasta do repositório</li>
+                </ul>
+                
+                <p><strong>3. "Your branch is ahead of 'origin/main'":</strong></p>
+                <ul>
+                    <li>Você tem commits locais que não foram enviados</li>
+                    <li>Use <code>git push</code> para enviar</li>
+                </ul>
+                
+                <p><strong>4. "Your branch is behind 'origin/main'":</strong></p>
+                <ul>
+                    <li>Existem atualizações no GitHub que você não tem</li>
+                    <li>Use <code>git pull</code> para baixar</li>
+                </ul>
+                
+                <p><strong>5. Conflito de merge:</strong></p>
+                <ul>
+                    <li>Acontece quando duas pessoas editam a mesma linha</li>
+                    <li>Abra o arquivo, resolva o conflito manualmente</li>
+                    <li>Faça <code>git add</code> e <code>git commit</code> novamente</li>
+                </ul>
+                
+                <p><strong>6. Esqueci de fazer pull antes de trabalhar:</strong></p>
+                <ul>
+                    <li>Faça <code>git stash</code> para guardar suas mudanças temporariamente</li>
+                    <li>Faça <code>git pull</code></li>
+                    <li>Faça <code>git stash pop</code> para recuperar suas mudanças</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Recursos Úteis e Links</h3>
+                
+                <p><strong>📚 Documentação Oficial:</strong></p>
+                <ul>
+                    <li><strong>Git:</strong> <code>https://git-scm.com/doc</code></li>
+                    <li><strong>GitHub:</strong> <code>https://docs.github.com</code></li>
+                </ul>
+                
+                <p><strong>🎓 Tutoriais Interativos:</strong></p>
+                <ul>
+                    <li><strong>Learn Git Branching:</strong> <code>https://learngitbranching.js.org</code> - Tutorial visual e interativo</li>
+                    <li><strong>GitHub Skills:</strong> <code>https://skills.github.com</code> - Cursos práticos do GitHub</li>
+                </ul>
+                
+                <p><strong>🔧 Ferramentas:</strong></p>
+                <ul>
+                    <li><strong>GitHub Desktop:</strong> <code>https://desktop.github.com</code></li>
+                    <li><strong>Visual Studio Code:</strong> <code>https://code.visualstudio.com</code></li>
+                    <li><strong>Git Bash:</strong> Incluído na instalação do Git</li>
+                </ul>
+                
+                <p><strong>📖 Guias de Referência:</strong></p>
+                <ul>
+                    <li><strong>GitHub Git Cheat Sheet:</strong> <code>https://education.github.com/git-cheat-sheet-education.pdf</code></li>
+                    <li><strong>Markdown Guide:</strong> <code>https://www.markdownguide.org</code> - Para escrever READMEs</li>
+                </ul>
+                
+                <p><strong>👥 Comunidade:</strong></p>
+                <ul>
+                    <li><strong>GitHub Community:</strong> <code>https://github.community</code></li>
+                    <li><strong>Stack Overflow:</strong> Para perguntas técnicas</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Glossário - Termos Importantes</h3>
+                
+                <table>
+                    <tr>
+                        <th>Termo</th>
+                        <th>Significado</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository (Repositório)</strong></td>
+                        <td>Pasta do projeto controlada pelo Git</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Commit</strong></td>
+                        <td>Snapshot/foto do projeto em um momento específico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Branch</strong></td>
+                        <td>Ramificação/versão paralela do projeto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Main/Master</strong></td>
+                        <td>Branch principal do projeto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Origin</strong></td>
+                        <td>Nome padrão do repositório remoto (no GitHub)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clone</strong></td>
+                        <td>Fazer uma cópia local de um repositório remoto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fork</strong></td>
+                        <td>Fazer uma cópia de um repositório de outra pessoa na sua conta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pull Request (PR)</strong></td>
+                        <td>Proposta de mudanças para um projeto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Merge</strong></td>
+                        <td>Unir duas branches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Push</strong></td>
+                        <td>Enviar commits locais para o repositório remoto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pull</strong></td>
+                        <td>Baixar atualizações do repositório remoto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Staging Area</strong></td>
+                        <td>Área de preparação onde ficam arquivos antes do commit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Working Directory</strong></td>
+                        <td>Pasta onde você trabalha nos arquivos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HEAD</strong></td>
+                        <td>Referência ao commit atual em que você está</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Remote</strong></td>
+                        <td>Versão do repositório hospedada em um servidor (ex: GitHub)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Local</strong></td>
+                        <td>Versão do repositório no seu computador</td>
+                    </tr>
+                    <tr>
+                        <td><strong>.gitignore</strong></td>
+                        <td>Arquivo que lista o que o Git deve ignorar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>README.md</strong></td>
+                        <td>Arquivo de documentação do projeto (em Markdown)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conflict</strong></td>
+                        <td>Quando duas pessoas editam a mesma parte do código</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSH</strong></td>
+                        <td>Protocolo seguro de autenticação sem senha</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HTTPS</strong></td>
+                        <td>Protocolo que usa usuário e senha/token</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="step-box">
+                <h3>Boas Práticas - Dicas de Ouro</h3>
+                
+                <p><strong>✅ Faça commits frequentes:</strong></p>
+                <ul>
+                    <li>Não espere acumular muitas mudanças</li>
+                    <li>Cada commit deve representar uma mudança lógica e completa</li>
+                    <li>É melhor fazer vários commits pequenos que um grande</li>
+                </ul>
+                
+                <p><strong>✅ Escreva boas mensagens de commit:</strong></p>
+                <ul>
+                    <li>Seja claro e específico</li>
+                    <li>Use verbos no imperativo: "Adiciona", "Corrige", "Remove"</li>
+                    <li>Evite mensagens vagas como "atualizações" ou "mudanças"</li>
+                </ul>
+                
+                <p><strong>✅ Use git pull antes de começar a trabalhar:</strong></p>
+                <ul>
+                    <li>Sempre baixe as últimas atualizações antes de fazer mudanças</li>
+                    <li>Isso evita conflitos</li>
+                </ul>
+                
+                <p><strong>✅ Use git status frequentemente:</strong></p>
+                <ul>
+                    <li>É o comando mais útil</li>
+                    <li>Use antes e depois de cada operação</li>
+                    <li>Ajuda a entender o que está acontecendo</li>
+                </ul>
+                
+                <p><strong>✅ Nunca commite senhas ou informações sensíveis:</strong></p>
+                <ul>
+                    <li>Use .gitignore para arquivos com senhas</li>
+                    <li>Use variáveis de ambiente</li>
+                    <li>Se commitou por engano, o histórico fica gravado!</li>
+                </ul>
+                
+                <p><strong>✅ Mantenha um README.md atualizado:</strong></p>
+                <ul>
+                    <li>Explique o que é o projeto</li>
+                    <li>Como instalar e usar</li>
+                    <li>Tecnologias utilizadas</li>
+                    <li>Como contribuir</li>
+                </ul>
+                
+                <p><strong>✅ Use branches para novas funcionalidades:</strong></p>
+                <ul>
+                    <li>Mantenha a branch main estável</li>
+                    <li>Crie uma branch para cada nova feature</li>
+                    <li>Faça merge só quando estiver funcionando</li>
+                </ul>
+                
+                <p><strong>✅ Faça backup do seu código:</strong></p>
+                <ul>
+                    <li>O GitHub é seu backup na nuvem</li>
+                    <li>Faça push regularmente</li>
+                    <li>Não dependa apenas do seu computador</li>
+                </ul>
+            </div>
+
+            <div class="step-box">
+                <h3>Exercícios Práticos para Fixar</h3>
+                
+                <p><strong>Exercício 1 - Primeiro Repositório:</strong></p>
+                <ol>
+                    <li>Crie um repositório chamado "exercicio-git"</li>
+                    <li>Clone para seu computador</li>
+                    <li>Crie um arquivo texto.txt com qualquer conteúdo</li>
+                    <li>Faça add, commit e push</li>
+                    <li>Verifique no GitHub se o arquivo apareceu</li>
+                </ol>
+                
+                <p><strong>Exercício 2 - Modificando Arquivos:</strong></p>
+                <ol>
+                    <li>Edite o arquivo texto.txt</li>
+                    <li>Use git status para ver o que mudou</li>
+                    <li>Use git diff para ver as diferenças</li>
+                    <li>Faça commit das mudanças</li>
+                    <li>Use git log para ver o histórico</li>
+                </ol>
+                
+                <p><strong>Exercício 3 - Trabalhando com Branches:</strong></p>
+                <ol>
+                    <li>Crie uma branch chamada "desenvolvimento"</li>
+                    <li>Mude para essa branch</li>
+                    <li>Crie um novo arquivo</li>
+                    <li>Faça commit</li>
+                    <li>Volte para a branch main</li>
+                    <li>Veja que o arquivo não está lá</li>
+                    <li>Faça merge da branch desenvolvimento com a main</li>
+                </ol>
+                
+                <p><strong>Exercício 4 - Projeto Completo:</strong></p>
+                <ol>
+                    <li>Crie um repositório para um mini projeto (ex: lista de tarefas)</li>
+                    <li>Crie pelo menos 3 arquivos (HTML, CSS, JS ou outro)</li>
+                    <li>Faça commits separados para cada arquivo</li>
+                    <li>Crie um README.md explicando o projeto</li>
+                    <li>Adicione um .gitignore se necessário</li>
+                    <li>Envie tudo para o GitHub</li>
+                </ol>
+                
+                <div class="success-box">
+                    <p class="success-icon">Complete estes exercícios e você terá domínio dos conceitos básicos!</p>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <h3>Comandos de Emergência - Para Quando Algo Dá Errado</h3>
+                
+                <p><strong>🆘 Desfazer o último commit (mas manter as mudanças):</strong></p>
+                <div class="command">
+                    git reset --soft HEAD~1
+                </div>
+                
+                <p><strong>🆘 Desfazer o último commit (e descartar as mudanças):</strong></p>
+                <div class="command">
+                    git reset --hard HEAD~1
+                </div>
+                <p class="warning-icon"><em>Cuidado: Isso apaga as mudanças permanentemente!</em></p>
+                
+                <p><strong>🆘 Desfazer mudanças não commitadas:</strong></p>
+                <div class="command">
+                    git restore nome-do-arquivo.txt
+                </div>
+                
+                <p><strong>🆘 Voltar um arquivo para como estava no último commit:</strong></p>
+                <div class="command">
+                    git checkout HEAD nome-do-arquivo.txt
+                </div>
+                
+                <p><strong>🆘 Ver quem modificou cada linha de um arquivo:</strong></p>
+                <div class="command">
+                    git blame nome-do-arquivo.txt
+                </div>
+                
+                <p><strong>🆘 Criar um commit que desfaz outro commit:</strong></p>
+                <div class="command">
+                    git revert ID-do-commit
+                </div>
+                
+                <p><strong>🆘 Guardar mudanças temporariamente (stash):</strong></p>
+                <div class="command">
+                    git stash<br>
+                    # Faça outras coisas<br>
+                    git stash pop  # Para recuperar as mudanças
+                </div>
+                
+                <div class="warning-box">
+                    <p class="warning-icon"><strong>Importante:</strong> Comandos com --hard apagam mudanças permanentemente. Use com cuidado!</p>
+                </div>
+            </div>
+
+            <div class="success-box" style="margin-top: 40px; padding: 30px;">
+                <h3 class="success-icon" style="font-size: 20px; margin-bottom: 15px;">Você chegou ao fim do manual! 🎉</h3>
+                <p style="font-size: 15px; margin-bottom: 15px;">Parabéns por completar este guia completo sobre Git e GitHub! Você agora tem todas as ferramentas necessárias para:</p>
+                <ul style="font-size: 14px; margin-left: 20px;">
+                    <li>Criar e gerenciar repositórios no GitHub</li>
+                    <li>Usar o Git via linha de comando (Git Bash)</li>
+                    <li>Trabalhar com Git no VS Code</li>
+                    <li>Colaborar em projetos de programação</li>
+                    <li>Manter um portfólio de código organizado</li>
+                </ul>
+                <p style="font-size: 15px; margin-top: 20px;"><strong>Lembre-se:</strong> A prática leva à perfeição! Continue criando projetos, fazendo commits e explorando o GitHub. Boa sorte na sua jornada como desenvolvedor! 💻🚀</p>
+            </div>
+
+        </div>
+
+        <footer>
+            <p><strong>Manual Git e GitHub para Iniciantes</strong></p>
+            <p>Desenvolvido para estudantes de programação</p>
+            <p style="margin-top: 10px; font-size: 14px;">📘 Mantenha este manual salvo para consultas futuras | Git Version Control System</p>
+            <p style="margin-bottom: 10px; font-size: 18px;">fdcneto@gmail.com</p>
+        </footer>
+    </div>
+</body>
+</html>
