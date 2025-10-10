@@ -1,0 +1,83 @@
+<!-- Guia: Usar e Sincronizar Repositório no Terminal do VS Code -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Guia: Trabalhar com Repositório no VS Code</title>
+<style>
+:root{
+  --bg:#f7fbfd;--card:#fff;--border:#e6eef6;--blue:#2563eb;--muted:#6b7280;--radius:12px;--code-bg:#f1f5f9;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Roboto Mono,Courier New,monospace;
+}
+body{margin:0;font-family:Inter,system-ui;background:linear-gradient(180deg,var(--bg),#fff 60%);color:#0f172a;padding:32px;line-height:1.5;}
+.container{max-width:1000px;margin:0 auto;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:18px;box-shadow:0 6px 20px rgba(15,23,42,0.03);}
+h3{color:var(--blue)}
+img.screenshot{width:100%;border:1px solid var(--border);border-radius:10px;margin:10px 0;box-shadow:0 4px 12px rgba(15,23,42,0.05)}
+pre{background:var(--code-bg);padding:14px;border-radius:8px;overflow:auto;font-family:var(--mono);font-size:18px;color:green; border:1px solid #e9f2fb}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="card">
+    <a href="./index.html">Voltar</a>
+  </div>
+
+  <div class="card">
+    <h3>1 — Abrir o Terminal Integrado</h3>
+    <p>No VS Code, pressione <code>Ctrl + `</code> (crase) ou vá em <strong>Exibir → Terminal</strong>.</p>
+    <img src="imagens/vscode-terminal.png" alt="Terminal integrado do VS Code" class="screenshot">
+  </div>
+
+  <div class="card">
+    <h3>2 — Acessar a pasta do repositório</h3>
+    <p>No terminal, entre na pasta onde está o seu projeto:</p>
+    <pre><code>cd caminho/para/o/repositorio</code></pre>
+    <img src="imagens/vscode-cd-folder.png" alt="Comando cd no terminal do VS Code" class="screenshot">
+  </div>
+
+  <div class="card">
+    <h3>3 — Inicializar repositório (se ainda não existir)</h3>
+    <p>Se a pasta não tiver o controle do Git, inicialize:</p>
+    <pre><code>git init</code></pre>
+    <p>Depois, conecte ao repositório remoto (GitHub):</p>
+    <pre><code>git remote add origin git@github.com:SEU_USUARIO/nome-do-repositorio.git</code></pre>
+    <img src="imagens/vscode-git-init.png" alt="Inicializando repositório Git" class="screenshot">
+  </div>
+
+  <div class="card">
+    <h3>4 — Abrir arquivos para editar</h3>
+    <p>Abra um arquivo específico:</p>
+    <pre><code>code index.html</code></pre>
+    <p>Ou abra toda a pasta do projeto:</p>
+    <pre><code>code .</code></pre>
+    <img src="imagens/vscode-open-folder.png" alt="Abrindo projeto no VS Code" class="screenshot">
+  </div>
+
+  <div class="card">
+    <h3>5 — Verificar status e enviar alterações</h3>
+    <p>Veja o que foi modificado:</p>
+    <pre><code>git status</code></pre>
+    <p>Adicione e envie as alterações para o GitHub:</p>
+    <pre><code>git add .
+git commit -m "Atualiza arquivos"
+git push origin main</code></pre>
+    <img src="imagens/vscode-git-push.png" alt="Comandos git add, commit e push" class="screenshot">
+  </div>
+
+  <div class="card">
+    <h3>6 — Atualizar projeto em outros computadores</h3>
+    <p>Antes de editar, sempre atualize seu repositório local:</p>
+    <pre><code>git pull origin main</code></pre>
+    <img src="imagens/vscode-git-pull.png" alt="Comando git pull no terminal" class="screenshot">
+  </div>
+
+  <footer>
+    <p>Guia ilustrado para trabalhar com repositórios GitHub no VS Code. <br>Para uso offline, gere um arquivo <strong>.zip</strong> contendo este HTML e a pasta <strong>imagens/</strong>.</p>
+    <p>fdcneto@gmail.com</p>
+  </footer>
+</div>
+</body>
+</html>
